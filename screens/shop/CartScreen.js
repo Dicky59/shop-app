@@ -5,7 +5,7 @@ import {
   FlatList,
   Button,
   StyleSheet,
-  ActivityIndicator,
+  ActivityIndicator
 } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -15,11 +15,11 @@ import Card from '../../components/UI/Card';
 import * as cartActions from '../../store/actions/cart';
 import * as ordersActions from '../../store/actions/orders';
 
-const CartScreen = (props) => {
+const CartScreen = props => {
   const [isLoading, setIsLoading] = useState(false);
 
-  const cartTotalAmount = useSelector((state) => state.cart.totalAmount);
-  const cartItems = useSelector((state) => {
+  const cartTotalAmount = useSelector(state => state.cart.totalAmount);
+  const cartItems = useSelector(state => {
     const transformedCartItems = [];
     for (const key in state.cart.items) {
       transformedCartItems.push({
@@ -27,7 +27,7 @@ const CartScreen = (props) => {
         productTitle: state.cart.items[key].productTitle,
         productPrice: state.cart.items[key].productPrice,
         quantity: state.cart.items[key].quantity,
-        sum: state.cart.items[key].sum,
+        sum: state.cart.items[key].sum
       });
     }
     return transformedCartItems.sort((a, b) =>
@@ -52,11 +52,11 @@ const CartScreen = (props) => {
           </Text>
         </Text>
         {isLoading ? (
-          <ActivityIndicator size='small' color={Colors.primary} />
+          <ActivityIndicator size="small" color={Colors.primary} />
         ) : (
           <Button
             color={Colors.accent}
-            title='Order Now'
+            title="Order Now"
             disabled={cartItems.length === 0}
             onPress={sendOrderHandler}
           />
@@ -64,8 +64,8 @@ const CartScreen = (props) => {
       </Card>
       <FlatList
         data={cartItems}
-        keyExtractor={(item) => item.productId}
-        renderItem={(itemData) => (
+        keyExtractor={item => item.productId}
+        renderItem={itemData => (
           <CartItem
             quantity={itemData.item.quantity}
             title={itemData.item.productTitle}
@@ -82,27 +82,27 @@ const CartScreen = (props) => {
 };
 
 CartScreen.navigationOptions = {
-  headerTitle: 'Your Cart',
+  headerTitle: 'Your Cart'
 };
 
 const styles = StyleSheet.create({
   screen: {
-    margin: 20,
+    margin: 20
   },
   summary: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
     marginBottom: 20,
-    padding: 10,
+    padding: 10
   },
   summaryText: {
     fontFamily: 'open-sans-bold',
-    fontSize: 18,
+    fontSize: 18
   },
   amount: {
-    color: Colors.primary,
-  },
+    color: Colors.primary
+  }
 });
 
 export default CartScreen;
