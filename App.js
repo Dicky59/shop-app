@@ -37,6 +37,7 @@ export default function App() {
         onFinish={() => {
           setFontLoaded(true);
         }}
+        onError={(err) => console.log(err)}
       />
     );
   }
